@@ -1,4 +1,5 @@
 import actionTypes from '../constants/actionTypes';
+const User = require('../components/Users');
 //import runtimeEnv from '@mars/heroku-js-runtime-env'
 const env = process.env;
 
@@ -16,23 +17,24 @@ function logout() {
 }
 
 export function submitLogin(data) {
-    return dispatch => {
-        return fetch(`${env.REACT_APP_API_URL}/signin`, {
-            method: 'POST',
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(data),
-            mode: 'cors'
-        }).then((response) => {
-            if (!response.ok) {
-                throw Error(response.statusText);
-            }
-            return response.json()
-        }).then((res) => {
+    return async dispatch => {
+        return data.then(async (data) => {
+            const user = await User.findOne({ username: data.username }).select('name username password');
+            if (!user)
+                throw 'Authentication failed. User not found.';
+          
+            const isMatch = await user.comparePassword(data.password); // Use await
+          
+              if (isMatch) {
+                // const userToken = { id: user._id, username: user.username }; // Use user._id (standard Mongoose)
+                // const token = jwt.sign(userToken, process.env.SECRET_KEY, { expiresIn: '1h' }); // Add expiry to the token (e.g., 1 hour)
+                // res.status(200).json({ success: true, token: 'JWT ' + token });
+              } else 
+                throw 'Authentication failed. Incorrect password.';
+            return data;
+        }).then((data) => {
             localStorage.setItem('username', data.username);
-            localStorage.setItem('token', res.token);
+            // localStorage.setItem('token', res.token);
 
             dispatch(userLoggedIn(data.username));
         }).catch((e) => console.log(e));
@@ -40,23 +42,27 @@ export function submitLogin(data) {
 }
 
 export function submitRegister(data) {
-    return dispatch => {
-        return fetch(`${env.REACT_APP_API_URL}/signup`, {
-            method: 'POST',
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(data),
-            mode: 'cors'
-        }).then((response) => {
-            if (!response.ok) {
-                throw Error(response.statusText);
+    return async dispatch => {
+        try {
+            const user = new User({ // Create user directly with the data
+              name: data.name,
+              username: data.username,
+              password: data.password,
+            });
+        
+            await user.save(); // Use await with user.save()
+
+            return data.then((data) => {
+                dispatch(submitLogin(data));
+            }).catch((e) => console.log(e));
+        
+          } catch (err) {
+            if (err.code === 11000) { // Strict equality check (===)
+                console.log('A user with that username already exists.')
+            } else {
+              console.error(err); // Log the error for debugging
             }
-            return response.json()
-        }).then((res) => {
-            dispatch(submitLogin(data));
-        }).catch((e) => console.log(e));
+        }
     }
 }
 
