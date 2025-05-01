@@ -17,15 +17,15 @@ function MovieHeader() {
     return (
         <div>
             <Navbar expand="lg" bg="dark" variant="dark">
-                <Navbar.Brand as={NavLink} to="/">Movie App</Navbar.Brand> 
+                <Navbar.Brand as={NavLink} to="/">Financial Indicators App</Navbar.Brand> 
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
                 <Navbar.Collapse id="basic-navbar-nav">
                 <Nav className="ml-auto">
-                    <Nav.Link as={NavLink} to="/movielist" disabled={!loggedIn}> 
-                        Movie List
+                    <Nav.Link as={NavLink} to="/itemlist" disabled={!loggedIn}> 
+                        Products
                     </Nav.Link>
-                    <Nav.Link as={NavLink} to={'/movie/' + (selectedMovie? selectedMovie._id: '')} disabled={!loggedIn}>
-                        Movie Detail
+                    <Nav.Link as={NavLink} to="/cart" disabled={!loggedIn}>
+                        Cart
                     </Nav.Link>
                     <Nav.Link as={NavLink} to="/signin"> 
                         {loggedIn? (
