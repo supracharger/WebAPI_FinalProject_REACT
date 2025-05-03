@@ -83,6 +83,12 @@
   object-fit: contain; /* Ensures the image scales to fit without cropping */
 }
 
+.item-img {
+  width: 25%;
+  max-width: 100%;
+  height: auto;
+}
+
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);

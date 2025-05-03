@@ -71,10 +71,17 @@ function Cart() {
         return <div>Loading....</div>;
     }
     var items2 = {};
-    for (const obj of memoizeditems)
-      items2[obj._id] = obj;
-    items2 = cart.map(id => items2[id]);
-    var total = items2.reduce((accumulator, obj) => accumulator + Number(obj.price), 0);
+    var total = -1;
+    try
+    {
+      for (const obj of memoizeditems)
+        items2[obj._id] = obj;
+      items2 = cart.map(id => items2[id]);
+      var total = items2.reduce((accumulator, obj) => accumulator + Number(obj.price), 0);
+    }
+    catch {
+      return <div>There was an error. Please Log Out then, Sign back In.</div>
+    }
     
     const placeOrder = () => {
       var det = {...details};
@@ -99,7 +106,7 @@ function Cart() {
           {items2.map(itm => {
             return (
             <tr>
-              <td><h3>{itm.imgurl}</h3></td>
+              <td><Image className="item-img" src={itm.imgurl}  alt={itm.name} /></td>
               <td><h3>{itm.name}</h3></td>
               <td>
                 <h3>${itm.price}</h3>

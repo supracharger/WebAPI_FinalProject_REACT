@@ -4,6 +4,7 @@ import { fetchItems, itemAdd } from "../actions/ItemActions";
 import { Link, useNavigate } from 'react-router-dom';
 import { Image, Nav, Carousel, Table } from 'react-bootstrap';
 import { BsStarFill } from 'react-icons/bs';
+import '../App.css';
 
 function ItemList() {
     const dispatch = useDispatch();
@@ -53,7 +54,7 @@ function ItemList() {
             var PassId = () => toCart(id);
             return (
             <tr>
-              <td><h3>{itm.imgurl}</h3></td>
+              <td><Image className="item-img" src={itm.imgurl}  alt={itm.name} /></td>
               <td>
                 <h3>{itm.name}</h3>
                 <button onClick={(!incart) ? PassId : toCheckout}>
