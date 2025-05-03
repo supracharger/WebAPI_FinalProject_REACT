@@ -4,8 +4,6 @@ const Constants = {
     FETCH_ITEMS: 'FETCH_ITEMS',
     ADD_ITEM: 'ADD_ITEM',
     FETCH_GEO: 'FETCH_GEO',
-    FETCH_MOVIE: 'FETCH_MOVIE',
-    SET_MOVIE: 'SET_MOVIE'
 }
 
 export default Constants;

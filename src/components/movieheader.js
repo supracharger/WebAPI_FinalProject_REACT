@@ -8,7 +8,6 @@ function MovieHeader() {
     const dispatch = useDispatch();
     const loggedIn = useSelector((state) => state.auth.loggedIn);
     const username = useSelector((state) => state.auth.username);
-    const selectedMovie = useSelector((state) => state.movie.selectedMovie);
     
     const logout = () => {
         dispatch(logoutUser());

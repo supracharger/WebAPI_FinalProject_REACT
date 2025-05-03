@@ -1,9 +1,6 @@
 import './App.css';
 import MovieHeader from './components/movieheader';
-import MovieList from './components/movielist';
-import Movie from './components/movie';
 import Authentication from './components/authentication';
-
 import Cart from './components/cart';
 import ItemList from './components/itemlist';
 import {HashRouter, Routes,  Route} from 'react-router-dom';

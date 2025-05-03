@@ -104,13 +104,15 @@ function Cart() {
         <h2>Cart</h2>
         <Table>
           {items2.map(itm => {
+            const id = itm._id;
+            const RemItem = () => RemoveItem(id);
             return (
             <tr>
               <td><Image className="item-img" src={itm.imgurl}  alt={itm.name} /></td>
               <td><h3>{itm.name}</h3></td>
               <td>
                 <h3>${itm.price}</h3>
-                <button onClick={RemoveItem}>
+                <button onClick={RemItem}>
                   REMOVE
                 </button>
                 </td>
