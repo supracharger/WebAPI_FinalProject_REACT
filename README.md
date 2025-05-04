@@ -4,6 +4,8 @@
 
 [API Repository](https://github.com/supracharger/WebAPI_FinalProject_API)
 
+**PowerPoint Overview:** is located at Overview.pptx
+
 # Description
 
 The site is a toy model that sells financial technical indicators. You can add items to your cart, remove items, and checkout after an address is included.
