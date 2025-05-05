@@ -1,5 +1,9 @@
 # Visit the Site:
 
+[![IMAGE ALT TEXT HERE](https://img.youtube.com/vi/j-P9hNl2jO0/0.jpg)](https://youtu.be/j-P9hNl2jO0)
+
+The above image is a YouTube Video. Click the image to view the video.
+
 [VISIT THE SITE](https://webapi-finalproject-react.onrender.com)
 
 [API Repository](https://github.com/supracharger/WebAPI_FinalProject_API)
